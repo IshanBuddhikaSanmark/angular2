@@ -15,25 +15,6 @@ var Hero = (function () {
     return Hero;
 }());
 exports.Hero = Hero;
-var AppComponent = (function () {
-    function AppComponent() {
-        this.heroes = HEROES;
-        this.title = 'Tour of Heroes';
-        this.hero = {
-            id: 1,
-            name: 'Windstorm'
-        };
-    }
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            template: "\n<h2>My Heroes</h2>\n<ul class=\"heroes\">\n<li *ngFor=\"let hero of heroes\">\n  <span class=\"badge\">{{hero.id}}</span> {{hero.name}}\n</li>\n</ul>\n "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
-}());
-exports.AppComponent = AppComponent;
 var HEROES = [
     { id: 11, name: 'Mr. Nice' },
     { id: 12, name: 'Narco' },
@@ -46,4 +27,20 @@ var HEROES = [
     { id: 19, name: 'Magma' },
     { id: 20, name: 'Tornado' }
 ];
+var AppComponent = (function () {
+    function AppComponent() {
+        this.title = 'Tour of Heroes';
+        this.heroes = HEROES;
+    }
+    AppComponent.prototype.onSelect = function (hero) { this.selectedHero = hero; };
+    AppComponent = __decorate([
+        core_1.Component({
+            selector: 'my-app',
+            template: "\n<h2>My Heroes</h2>\n<ul class=\"heroes\">\n<li *ngFor=\"let hero of heroes\" (click)=\"onSelect(hero)\">\n  <span class=\"badge\">{{hero.id}}</span> {{hero.name}}\n</li>\n</ul> \n<div *ngIf=\"selectedHero\">\n  <h2>{{selectedHero.name}} details!</h2>\n  <div><label>id: </label>{{selectedHero.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"selectedHero.name\" placeholder=\"name\"/>\n  </div>\n</div>\n "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AppComponent);
+    return AppComponent;
+}());
+exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
